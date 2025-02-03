@@ -1,9 +1,9 @@
 import { chakra } from '@chakra-ui/react'
-import { type ComponentProps, h } from 'preact'
+import React from 'react'
 
-import { getThemeColor } from '@client/theme/colors'
+import { getThemeColor } from '../../theme/colors'
 
-interface Props extends ComponentProps<typeof chakra.svg> {
+interface Props extends React.ComponentProps<typeof chakra.svg> {
   app?: typeof window.APP
 }
 

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {JSX, ReactNode, useCallback} from 'react'
 import { Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
 
 

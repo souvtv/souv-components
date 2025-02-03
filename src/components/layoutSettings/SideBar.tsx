@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {JSX, useCallback} from 'react'
 import { Separator, VStack, Button } from '@chakra-ui/react'
 
 
@@ -20,7 +20,7 @@ export const SideBar = ({ primaryRoutes, secondaryRoutes, onNavigate, onCheckMat
   )
 
   return (
-    <VStack colorPalette={'gray'} overflowY={'scroll'} h={'100%'} align={'stretch'}>
+    <VStack colorPalette={'gray'} overflowY={'auto'} h={'100%'} align={'stretch'}>
       {primaryRoutes?.map((r, i) => (
         <Button key={i} variant={onCheckMatch?.(r.path, r.pathEnd) ? 'subtle' : 'ghost'} onClick={handleNavigate(r.path)}>
           {r.icon}

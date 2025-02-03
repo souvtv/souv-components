@@ -1,6 +1,8 @@
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
 import { SouvDefault } from './colors'
+import { IconRecipe } from './recipes/icon'
+import { HeadingRecipe } from './recipes/heading'
 
 const baseConfig = defineConfig({
   conditions: {
@@ -27,6 +29,10 @@ const baseConfig = defineConfig({
       laptop: '62em',
       mobile: '30em',
       tablet: '48em',
+    },
+    recipes:{
+      icon: IconRecipe,
+      heading:HeadingRecipe
     },
     semanticTokens: {
       colors: {
@@ -334,6 +340,6 @@ const baseConfig = defineConfig({
   },
 })
 
-export const BaseThemeConfig = baseConfig
-export const BaseTheme = createSystem(defaultConfig, baseConfig)
-export default BaseTheme
+export const SouvThemeConfig = baseConfig
+export const SouvTheme = createSystem(defaultConfig, baseConfig)
+export default SouvTheme

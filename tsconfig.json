@@ -19,8 +19,7 @@
     "importHelpers": true,
     "strict": true,
     "resolveJsonModule": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "jsx": "react-jsx"
   },
   "exclude": [
     "node_modules",
