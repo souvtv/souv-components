@@ -1,4 +1,4 @@
-declare type NativeEventDispatch = import('@client/helpers/events').EventDispatch<{ message: any }>
+declare type NativeEventDispatch = import('@client/helpers/events').EventDispatch<{ message: unknown }>
 
 export {}
 

@@ -1,5 +1,5 @@
-import React, {JSX, ReactNode, useCallback} from 'react'
-import { Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
+import React, { useCallback} from 'react'
+import { Center,Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
 
 
 import { Column } from '../column'
@@ -7,19 +7,26 @@ import { Row } from '../row'
 import { SouvLogo } from '../svg/SouvLogo'
 
 import { AppMenu } from './AppMenu'
+import { LayoutRouteType } from 'src/types/route'
 
-type RouteType = { label: string; icon?: JSX.Element; path: string; pathMatch?: string; pathEnd?: boolean }
 
 export interface HeaderProps {
   appName: string
-  appIcon?: ReactNode
+  appIcon?: React.ReactNode
   maxW?: string
   avatar?: string
-  avatarFallback?: ReactNode
-  headerContent?: ReactNode
-  actionContent?: ReactNode
-  primaryRoutes?: RouteType[]
-  secondaryRoutes?: RouteType[]
+  showAppSelector?: boolean
+  avatarName?: string
+  headerContent?: React.ReactNode
+  actionContent?: React.ReactNode
+  primaryRoutes?: LayoutRouteType[]
+  secondaryRoutes?: LayoutRouteType[]
+  localizations?: {
+    account?: string
+    live?: string
+    social?: string
+    mam?: string
+  }
   onCheckMatch?: (path: string, end?: boolean) => void
   onNavigate?: (path: string) => void
 }
@@ -33,7 +40,9 @@ export const Header = ({
   primaryRoutes,
   secondaryRoutes,
   avatar,
-  avatarFallback,
+  avatarName,
+  showAppSelector = true,
+  localizations,
   onNavigate,
   onCheckMatch,
 }: HeaderProps) => {
@@ -45,35 +54,35 @@ export const Header = ({
   )
 
   return (
-    <Column w={'100%'} h={'fit-content'} backgroundColor={'bg.emphasized'} align={'center'} justify={'start'}>
-      <Column w={'100%'} h={'100%'} maxW={maxW} gap={'1.25rem'} pl={'2rem'} pr={'2rem'} pt={'1rem'}>
-        <Card.Root w={'100%'} h={'3.8rem'} variant={'subtle'} borderRadius={'15px'}>
-          <Card.Body padding={'0.5rem'}>
-            <Row w={'100%'} h={'100%'} justify={'start'} align={'center'} gap={'0.5rem'}>
+     <Center w={'full'} h={'fit-content'} backgroundColor={'bg.emphasized'} px={'3'} py={'2'}>
+      <Column w={'full'} h={'full'} maxW={maxW} gap={'2'}>
+        <Card.Root w={'full'} h={'3.6rem'} variant={'subtle'} borderRadius={'xl'}>
+          <Card.Body padding={'2'}>
+            <Row w={'full'} h={'full'} justify={'start'} align={'center'} gap={'2'}>
               {appIcon ? (
                 appIcon
               ) : (
                 <Icon size={'4xl'}>
-                  <SouvLogo />
+                  <SouvLogo fill={'theme.fg'} />
                 </Icon>
               )}
               <Heading size={'subtitle'}>{appName}</Heading>
 
-              <AppMenu avatar={avatar} avatarFallback={avatarFallback} />
+              {showAppSelector && <AppMenu avatar={avatar} avatarName={avatarName} localizations={localizations} />}
 
-              <Separator h={'100%'} orientation={'vertical'} />
+              <Separator h={'full'} orientation={'vertical'} />
 
               {headerContent}
             </Row>
           </Card.Body>
         </Card.Root>
 
-        <Row w={'100%'} justify={'space-between'} align={'center'} pb={'0.5rem'}>
+        <Row w={'full'} justify={'space-between'} align={'center'}>
           {(primaryRoutes || actionContent) && (
-            <HStack w={'100%'}>
+            <HStack w={'full'}>
               {actionContent}
 
-              {actionContent && <Separator h={'2rem'} borderColor={'border.emphasized'} orientation={'vertical'} />}
+              {actionContent && <Separator h={'full'} borderColor={'border.emphasized'} orientation={'vertical'} />}
 
               <Tabs.Root
                 variant={'solid'}
@@ -119,6 +128,6 @@ export const Header = ({
           )}
         </Row>
       </Column>
-    </Column>
+    </Center>
   )
 }

@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "module": "index.tsx",
   "type": "module",
+  "scripts": {
+    "chakra": "chakra typegen ./src/theme/index.ts"
+  },
   "dependencies": {
     "@chakra-ui/react": "^3",
     "@emotion/react": "^11.14.0",

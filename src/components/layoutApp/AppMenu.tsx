@@ -1,22 +1,26 @@
-import { Box, Group, Icon, IconButton } from '@chakra-ui/react'
-import React, {useCallback, useMemo} from 'react'
-import { IoApps, IoChevronDown } from 'react-icons/io5'
-import { FaUser } from 'react-icons/fa6'
+import { Avatar,Box, Group, Icon, IconButton } from '@chakra-ui/react'
+import React, { useCallback, useMemo} from 'react'
+import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
 import { SouvLogo } from '../svg/SouvLogo'
-// import { TrText } from '@client/i18n'
 
-import { Avatar } from '../ui/Avatar'
 
 const BASE_URL = `https://api.souv.tv`
 
 interface Props {
   avatar?: string
-  avatarFallback?: React.ReactNode
+  avatarName?: string
+  localizations?: {
+    account?: string
+    live?: string
+    social?: string
+    mam?: string
+  }
 }
 
-export const AppMenu = ({ avatar, avatarFallback }: Props) => {
+export const AppMenu = ({ avatar, avatarName, localizations }: Props) => {
+  
   const onClick = useCallback(
     (link: string) => () => {
       window.location.assign(link)
@@ -27,39 +31,43 @@ export const AppMenu = ({ avatar, avatarFallback }: Props) => {
   const apps = useMemo(
     () => [
       {
-        avatar: <Avatar loading={'eager'} src={avatar} fallback={avatarFallback || <FaUser />} />,
-        label: 'Conta', //TrText('account'),
+        avatar: (
+          <Avatar.Root>
+            <Avatar.Fallback name={avatarName} />
+            <Avatar.Image src={avatar} />
+          </Avatar.Root>
+        ),
+        label: localizations?.account || 'Account',
         link: BASE_URL.replace('api', 'account'),
         value: 'account',
       },
       {
         icon: <SouvLogo app={'live'} />,
-        label: 'Live',
+        label: localizations?.live || 'Live',
         link: BASE_URL.replace('api', 'live'),
         value: 'live',
       },
       {
         icon: <SouvLogo app={'social'} />,
-        label: 'Social',
-        link: BASE_URL.replace('api', 'social-web'),
+        label: localizations?.social || 'Social',
+        link: BASE_URL.replace('api', 'social'),
         value: 'social',
       },
-      { icon: <SouvLogo app={'mam'} />, label: 'Galeria', link: BASE_URL.replace('api', 'mam'), value: 'mam' },
+      { icon: <SouvLogo app={'mam'} />, label: localizations?.mam || "Gallery", link: BASE_URL.replace('api', 'mam'), value: 'mam' },
     ],
-    [avatar, avatarFallback],
+    [avatar, avatarName, localizations?.social, localizations?.live, localizations?.account, localizations?.mam],
   )
 
   return (
-    <Box colorPalette={'gray'}>
-      <MenuRoot variant={'subtle'}>
+  <Box colorPalette={'gray'}>
+      <MenuRoot variant={'subtle'} lazyMount={false} unmountOnExit={false}>
         <MenuTrigger asChild>
-          <IconButton variant={'ghost'} p={'0.5rem'}>
+          <IconButton variant={'ghost'} size={'lg'} p={0} outline={'none'}>
             <IoApps />
-            <IoChevronDown />
           </IconButton>
         </MenuTrigger>
         <MenuContent>
-          <Group maxW={'20rem'} grow gap={'1rem'} wrap={'wrap'}>
+          <Group maxW={'16rem'} grow gap={'1rem'} wrap={'wrap'}>
             {apps?.map(item => (
               <MenuItem
                 key={item.value}
