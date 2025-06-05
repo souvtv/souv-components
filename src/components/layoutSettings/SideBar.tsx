@@ -1,12 +1,10 @@
-import React, {JSX, useCallback} from 'react'
+import React, { useCallback} from 'react'
 import { Separator, VStack, Button } from '@chakra-ui/react'
-
-
-export type RouteType = { label: string; icon?: JSX.Element; path: string; pathEnd?: boolean }
+import { LayoutRouteType } from 'src/types/route'
 
 export interface SidebarProps {
-  primaryRoutes?: RouteType[]
-  secondaryRoutes?: RouteType[]
+  primaryRoutes?: LayoutRouteType[]
+  secondaryRoutes?: LayoutRouteType[]
   onCheckMatch?: (path: string, end?: boolean) => boolean
   onNavigate?: (path: string) => void
 }
