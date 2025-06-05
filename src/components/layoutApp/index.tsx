@@ -6,6 +6,7 @@ import { Header, HeaderProps } from './Header'
 
 const defMaxW = '1440px'
 const header = '7.6rem'
+const headerSlim = '4.6rem'
 const gap = '0.5rem'
 
 interface Props extends HeaderProps {
@@ -21,7 +22,9 @@ export const LayoutApp = ({ children, maxW, ...p }: Props) => (
     maxWidth={'100vw'}
     maxHeight={'100vh'}
     gap={gap}
-    gridTemplateRows={`${header} calc(100vh - ${gap} - ${header})`}
+    gridTemplateRows={!!p.primaryRoutes?.length || !!p.secondaryRoutes?.length ? 
+      `${header} calc(100vh - ${gap} - ${header})` :
+      `${headerSlim} calc(100vh - ${gap} - ${headerSlim})`}
     gridTemplateColumns={`100vw`}
     gridTemplateAreas={`
   'header'
@@ -31,6 +34,7 @@ export const LayoutApp = ({ children, maxW, ...p }: Props) => (
     <GridItem h={'full'} w={'full'} gridArea={'header'}>
       <Header {...p} maxW={maxW || defMaxW} />
     </GridItem>
+
     <GridItem
       h={'full'}
       w={'full'}

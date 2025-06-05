@@ -1,5 +1,5 @@
 import React, { useCallback} from 'react'
-import { Center,Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
+import { Show, Center, Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
 
 
 import { Column } from '../column'
@@ -77,8 +77,9 @@ export const Header = ({
           </Card.Body>
         </Card.Root>
 
+      <Show when={!!primaryRoutes?.length || !!secondaryRoutes?.length}>
         <Row w={'full'} justify={'space-between'} align={'center'}>
-          {(primaryRoutes || actionContent) && (
+          <Show when={primaryRoutes || actionContent}>
             <HStack w={'full'}>
               {actionContent}
 
@@ -101,9 +102,9 @@ export const Header = ({
                 </Tabs.List>
               </Tabs.Root>
             </HStack>
-          )}
+          </Show>
 
-          {secondaryRoutes && secondaryRoutes.length > 0 && (
+          <Show when={!!secondaryRoutes?.length}>
             <HStack justify={'end'}>
               <Separator h={'2rem'} borderColor={'border.emphasized'} orientation={'vertical'} />
 
@@ -125,8 +126,9 @@ export const Header = ({
                 </Tabs.List>
               </Tabs.Root>
             </HStack>
-          )}
+          </Show>
         </Row>
+      </Show>
       </Column>
     </Center>
   )

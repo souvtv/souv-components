@@ -6,7 +6,7 @@ import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
 import { SouvLogo } from '../svg/SouvLogo'
 
 
-const BASE_URL = `https://api.souv.tv`
+const baseUrl = BASE_URL || `https://api.souv.tv`
 
 interface Props {
   avatar?: string
@@ -38,22 +38,22 @@ export const AppMenu = ({ avatar, avatarName, localizations }: Props) => {
           </Avatar.Root>
         ),
         label: localizations?.account || 'Account',
-        link: BASE_URL.replace('api', 'account'),
+        link: baseUrl.replace('api', 'account'),
         value: 'account',
       },
       {
         icon: <SouvLogo app={'live'} />,
         label: localizations?.live || 'Live',
-        link: BASE_URL.replace('api', 'live'),
+        link: baseUrl.replace('api', 'live'),
         value: 'live',
       },
       {
         icon: <SouvLogo app={'social'} />,
         label: localizations?.social || 'Social',
-        link: BASE_URL.replace('api', 'social'),
+        link: baseUrl.replace('api', 'social'),
         value: 'social',
       },
-      { icon: <SouvLogo app={'mam'} />, label: localizations?.mam || "Gallery", link: BASE_URL.replace('api', 'mam'), value: 'mam' },
+      { icon: <SouvLogo app={'mam'} />, label: localizations?.mam || "Gallery", link: baseUrl.replace('api', 'mam'), value: 'mam' },
     ],
     [avatar, avatarName, localizations?.social, localizations?.live, localizations?.account, localizations?.mam],
   )
