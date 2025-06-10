@@ -5,8 +5,19 @@ import { IoApps } from 'react-icons/io5'
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
 import { SouvLogo } from '../svg/SouvLogo'
 
+const getBaseUrl = () => {
+  const def = 'https://api.souv.tv'
 
-const baseUrl = BASE_URL || `https://api.souv.tv`
+  if(typeof BASE_URL !== 'undefined'){
+    return BASE_URL || def
+  } else if (typeof process !== 'undefined' && process.env.BASE_URL) {
+    return process.env.BASE_URL || def
+  }
+  
+  return def
+}
+
+const baseUrl = getBaseUrl()
 
 interface Props {
   avatar?: string
