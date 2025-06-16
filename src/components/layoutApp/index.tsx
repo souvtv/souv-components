@@ -7,13 +7,17 @@ import { Header, HeaderProps } from './Header'
 const defMaxW = '1440px'
 const header = '7.6rem'
 const headerSlim = '4.6rem'
-const gap = '0.5rem'
 
 interface Props extends HeaderProps {
+  noContentPadding?: boolean
   children?: ReactNode
 }
 
-export const LayoutApp = ({ children, maxW, ...p }: Props) => (
+export const LayoutApp = ({ children, noContentPadding, maxW, ...p }: Props) => {
+  
+const gap = noContentPadding ? '0px' : '0.5rem'
+  
+return (
   <Grid
     display={'grid'}
     overflow={'hidden'}
@@ -44,9 +48,9 @@ export const LayoutApp = ({ children, maxW, ...p }: Props) => (
       overflow={'visible'}
       gridArea={'content'}
     >
-      <Box h={'full'} w={'full'} maxW={maxW || defMaxW} overflow={'visible'} pb={'1'} px={'2'}>
+      <Box h={'full'} w={'full'} maxW={maxW || defMaxW} overflow={'visible'} pb={noContentPadding ? 0:'1'} px={noContentPadding ? 0:'2'}>
         {children}
       </Box>
     </GridItem>
   </Grid>
-)
+)}
