@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.0.7
+
+### Patch Changes
+
+- 8b8f696: Opção de remover padding
+
 ## 1.0.6
 
 ### Patch Changes
