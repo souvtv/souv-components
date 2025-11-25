@@ -1,11 +1,11 @@
 declare type NativeEventDispatch = import('@client/helpers/events').EventDispatch<{ message: unknown }>
 
-export { }
+export {}
 
 declare global {
   const BASE_URL: string | undefined | null
 
   interface Window {
-    APP: 'jobs' | 'souv' | 'reporter' | 'social' | 'live' | 'mam' | 'account'
+    APP: 'jobs' | 'souv' | 'reporter' | 'social' | 'live' | 'mam' | 'account' | 'visao' | string
   }
 }
