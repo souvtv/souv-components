@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.1.0
+
+### Minor Changes
+
+- 6b4ce00: Adicionando suporte para a entrada de novos apps na grid e adição do suporte para o Visão.
+
 ## 1.0.7
 
 ### Patch Changes

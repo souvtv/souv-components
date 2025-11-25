@@ -1,7 +1,7 @@
 {
   "name": "souv-components",
   "private": true,
-  "version": "1.0.7",
+  "version": "1.1.0",
   "module": "index.tsx",
   "type": "module",
   "scripts": {
