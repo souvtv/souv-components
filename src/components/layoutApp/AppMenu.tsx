@@ -1,9 +1,9 @@
-import { Avatar, Box, Group, Icon, IconButton, Image } from '@chakra-ui/react'
+import { Avatar, Box, Group, Icon, IconButton } from '@chakra-ui/react'
 import React, { useCallback, useMemo } from 'react'
 import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
-import ViIcon from '../img/vicon.png'
+import { ViIcon } from '../svg/ViIcon'
 import { SouvLogo } from '../svg/SouvLogo'
 
 const getBaseUrl = () => {
@@ -90,7 +90,7 @@ export const AppMenu = ({ avatar, avatarName, localizations, showVisaonApp, extr
       },
       showVisaonApp
         ? {
-            icon: <Image src={`/${ViIcon}`} />,
+            icon: <ViIcon />,
             label: localizations?.visao || 'Visão',
             link: baseUrl.replace('api', 'visao'),
             value: 'visao',
