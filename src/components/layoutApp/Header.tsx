@@ -16,7 +16,6 @@ export interface HeaderProps {
   avatar?: string
   showAppSelector?: boolean
   openNewTab?: boolean
-  showVisaonApp?: boolean
   extraApps?: AppItem[]
   avatarName?: string
   headerContent?: React.ReactNode
@@ -50,7 +49,6 @@ export const Header = ({
   onCheckMatch,
   extraApps,
   openNewTab,
-  showVisaonApp,
 }: HeaderProps) => {
   const handleSelectRoute = useCallback(
     (path: string) => () => {
@@ -78,7 +76,6 @@ export const Header = ({
                 <AppMenu
                   extraApps={extraApps}
                   openNewTab={openNewTab}
-                  showVisaonApp={showVisaonApp}
                   avatar={avatar}
                   avatarName={avatarName}
                   localizations={localizations}

@@ -10,7 +10,6 @@ Agora você pode incluir aplicativos extras na grid de forma simples e flexível
 |-------------------|-----------------------|-------------|---------------------------------------------------------------------------|
 | `extraApps`       | `AppItem[]`           | Não         | Lista de aplicativos extras para exibir na grid                           |
 | `openNewTab`      | `boolean`             | Não         | Se `true`, o link do app será aberto em uma nova aba (padrão: `false`)    |
-| `showVisaonApp`   | `boolean`             | Não         | Se `true`, exibe o app "Visão" na grid (padrão: `false`)                  |
 
 ### Interface AppItem
 

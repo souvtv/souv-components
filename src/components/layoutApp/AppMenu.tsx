@@ -3,7 +3,6 @@ import React, { useCallback, useMemo } from 'react'
 import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
-import { ViIcon } from '../svg/ViIcon'
 import { SouvLogo } from '../svg/SouvLogo'
 
 const getBaseUrl = () => {
@@ -32,7 +31,6 @@ export interface AppItem {
 interface Props {
   avatar?: string
   avatarName?: string
-  showVisaonApp?: boolean
   openNewTab?: boolean
   localizations?: {
     account?: string
@@ -45,7 +43,7 @@ interface Props {
   extraApps?: AppItem[]
 }
 
-export const AppMenu = ({ avatar, avatarName, localizations, showVisaonApp, extraApps = [], openNewTab }: Props) => {
+export const AppMenu = ({ avatar, avatarName, localizations, extraApps = [], openNewTab }: Props) => {
   const onClick = useCallback(
     (link: string) => () => {
       if (openNewTab) {
@@ -88,27 +86,10 @@ export const AppMenu = ({ avatar, avatarName, localizations, showVisaonApp, extr
         link: baseUrl.replace('api', 'mam'),
         value: 'mam',
       },
-      showVisaonApp
-        ? {
-            icon: <ViIcon />,
-            label: localizations?.visao || 'Visão',
-            link: baseUrl.replace('api', 'visao'),
-            value: 'visao',
-          }
-        : undefined,
     ]
 
     return apps.filter(Boolean) as AppItem[]
-  }, [
-    avatar,
-    avatarName,
-    showVisaonApp,
-    localizations?.account,
-    localizations?.live,
-    localizations?.social,
-    localizations?.mam,
-    localizations?.visao,
-  ])
+  }, [avatar, avatarName, localizations?.account, localizations?.live, localizations?.mam, localizations?.social])
 
   const apps = useMemo(
     () => [...defaultApps, ...extraApps].filter(app => app?.visible !== false),
