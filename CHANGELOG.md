@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.1.2
+
+### Patch Changes
+
+- 677bf60: adicionando icone(sdvg) do visao
+
 ## 1.1.1
 
 ### Patch Changes
