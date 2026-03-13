@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Show, Center, Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
+import { Show, Center, Card, Heading, HStack, Icon, Separator, Tabs, Link } from '@chakra-ui/react'
 
 import { LayoutRouteType } from 'src/types/route'
 
@@ -21,7 +21,9 @@ export interface HeaderProps {
   headerContent?: React.ReactNode
   actionContent?: React.ReactNode
   primaryRoutes?: LayoutRouteType[]
+  primaryExtra?: React.ReactNode
   secondaryRoutes?: LayoutRouteType[]
+  secondaryExtra?: React.ReactNode
   localizations?: {
     account?: string
     live?: string
@@ -48,7 +50,9 @@ export const Header = ({
   onNavigate,
   onCheckMatch,
   extraApps,
-  openNewTab,
+  openNewTab, primaryExtra, secondaryExtra
+
+
 }: HeaderProps) => {
   const handleSelectRoute = useCallback(
     (path: string) => () => {
@@ -72,15 +76,7 @@ export const Header = ({
               )}
               <Heading size={'subtitle'}>{appName}</Heading>
 
-              {showAppSelector && (
-                <AppMenu
-                  extraApps={extraApps}
-                  openNewTab={openNewTab}
-                  avatar={avatar}
-                  avatarName={avatarName}
-                  localizations={localizations}
-                />
-              )}
+              {showAppSelector && <AppMenu extraApps={extraApps} openNewTab={openNewTab} avatar={avatar} avatarName={avatarName} localizations={localizations} />}
 
               <Separator h={'full'} orientation={'vertical'} />
 
@@ -91,55 +87,72 @@ export const Header = ({
 
         <Show when={!!primaryRoutes?.length || !!secondaryRoutes?.length}>
           <Row w={'full'} justify={'space-between'} align={'center'}>
-            <Show when={primaryRoutes || actionContent}>
+            <Show when={!!primaryRoutes || !!actionContent || !!primaryExtra}>
               <HStack w={'full'}>
                 {actionContent}
 
-                {actionContent && <Separator h={'full'} borderColor={'border.emphasized'} orientation={'vertical'} />}
+                <Show when={!!actionContent}>
+                  <Separator h={'full'} borderColor={'border.emphasized'} orientation={'vertical'} />
+                </Show>
 
                 <Tabs.Root
                   variant={'solid'}
                   colorPalette={'gray'}
                   value={
-                    primaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label ||
-                    ''
+                    primaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label || ''
                   }
                 >
                   <Tabs.List>
                     {primaryRoutes?.map((route, idx) => (
-                      <Tabs.Trigger key={idx} value={route.label} onClick={handleSelectRoute(route.path)}>
+                      <Tabs.Trigger key={idx} value={route.label} as={Link} onClick={handleSelectRoute(route.path)}>
                         {route.icon}
                         {route.label}
                       </Tabs.Trigger>
                     ))}
                   </Tabs.List>
                 </Tabs.Root>
+
+                <Show when={!!primaryExtra}>
+                  {primaryExtra}
+                </Show>
+
               </HStack>
             </Show>
 
-            <Show when={!!secondaryRoutes?.length}>
+            <Show when={!!secondaryRoutes?.length || !!secondaryExtra}>
               <HStack justify={'end'}>
+
                 <Separator h={'2rem'} borderColor={'border.emphasized'} orientation={'vertical'} />
 
-                <Tabs.Root
-                  variant={'solid'}
-                  colorPalette={'gray'}
-                  value={
-                    secondaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label ||
-                    ''
-                  }
-                >
-                  <Tabs.List>
-                    {secondaryRoutes?.map((route, idx) => (
-                      <Tabs.Trigger key={idx} value={route.label} onClick={handleSelectRoute(route.path)}>
-                        {route.icon}
-                        {route.label}
-                      </Tabs.Trigger>
-                    ))}
-                  </Tabs.List>
-                </Tabs.Root>
+
+                <Show when={!!secondaryRoutes?.length}>
+
+                  <Tabs.Root
+                    variant={'solid'}
+                    colorPalette={'gray'}
+                    value={
+                      secondaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label ||
+                      ''
+                    }
+                  >
+                    <Tabs.List>
+                      {secondaryRoutes?.map((route, idx) => (
+                        <Tabs.Trigger key={idx} value={route.label} onClick={handleSelectRoute(route.path)}>
+                          {route.icon}
+                          {route.label}
+                        </Tabs.Trigger>
+                      ))}
+                    </Tabs.List>
+                  </Tabs.Root>
+
+                </Show>
+
+                <Show when={!!secondaryExtra}>
+                  {secondaryExtra}
+                </Show>
               </HStack>
             </Show>
+
           </Row>
         </Show>
       </Column>
