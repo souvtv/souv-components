@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.1.1
+
+### Patch Changes
+
+- b8256fb: adicionado icone para o visao
+
 ## 1.1.0
 
 ### Minor Changes
