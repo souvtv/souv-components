@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.1.4
+
+### Patch Changes
+
+- 6bb9f0e: removendo componente não utilizando , que poderia quebrar o header
+
 ## 1.1.2
 
 ### Patch Changes
