@@ -1,0 +1,87 @@
+{
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.rulers": [
+        122
+    ],
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "[sql]": {
+        "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+    },
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "always"
+    },
+    "editor.tabSize": 2,
+    "emmet.triggerExpansionOnTab": true,
+    "eslint.format.enable": true,
+    "eslint.useFlatConfig": true,
+    "editor.formatOnSave": true,
+    "files.eol": "\n",
+    "dart.lineLength": 122,
+    "html.format.wrapLineLength": 122,
+    "yaml.format.printWidth": 122,
+    "evenBetterToml.formatter.columnWidth": 122,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "chat.agent.enabled": true,
+    "githubIssues.issueBranchTitle": "issue/#${issueNumber}_${sanitizedIssueTitle}",
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "is:open assignee:${user} repo:${owner}/${repository}",
+            "groupBy": [],
+        },
+        {
+            "label": "Waiting For My Review",
+            "query": "is:open review-requested:${user} repo:${owner}/${repository}"
+        },
+        {
+            "label": "Mentioned Me",
+            "query": "is:open mentions:${user} repo:${owner}/${repository}"
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "Recent Issues",
+            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+        },
+        {
+            "label": "Created By Me",
+            "query": "is:open author:${user} repo:${owner}/${repository}"
+        }
+    ],
+    "cmake.ignoreCMakeListsMissing": true
+}

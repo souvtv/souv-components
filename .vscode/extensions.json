@@ -1,0 +1,28 @@
+{
+  "recommendations": [
+    "styled-components.vscode-styled-components",
+    "dbaeumer.vscode-eslint",
+    "rvest.vs-code-prettier-eslint",
+    "ms-playwright.playwright",
+    "ms-vscode.typescript-javascript-grammar",
+    "graphql.vscode-graphql",
+    "graphql.vscode-graphql-syntax",
+    "tamasfe.even-better-toml",
+    "rust-lang.rust-analyzer",
+    "swellaby.rust-pack",
+    "1yib.rust-bundle",
+    "redhat.vscode-yaml",
+    "tauri-apps.tauri-vscode",
+    "anseki.vscode-color",
+    "simonsiefke.svg-preview",
+    "unifiedjs.vscode-mdx",
+    "xyc.vscode-mdx-preview",
+    "gruntfuggly.todo-tree",
+    "inferrinizzard.prettier-sql-vscode",
+    "fill-labs.dependi",
+    "qwtel.sqlite-viewer",
+    "github.vscode-github-actions",
+    "github.vscode-pull-request-github",
+    "github.copilot-chat",
+  ]
+}
