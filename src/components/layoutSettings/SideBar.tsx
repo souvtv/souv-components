@@ -1,5 +1,6 @@
-import React, { useCallback} from 'react'
+import { useCallback } from 'react'
 import { Separator, VStack, Button } from '@chakra-ui/react'
+
 import { LayoutRouteType } from 'src/types/route'
 
 export interface SidebarProps {
@@ -10,7 +11,6 @@ export interface SidebarProps {
 }
 
 export const SideBar = ({ primaryRoutes, secondaryRoutes, onNavigate, onCheckMatch }: SidebarProps) => {
-
   const handleNavigate = useCallback(
     (path: string) => () => {
       onNavigate?.(path)

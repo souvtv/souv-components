@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable sort-keys */
 import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
 import { SouvDefault } from './colors'
@@ -30,9 +32,9 @@ const baseConfig = defineConfig({
       mobile: '30em',
       tablet: '48em',
     },
-    recipes:{
+    recipes: {
       icon: IconRecipe,
-      heading:HeadingRecipe
+      heading: HeadingRecipe,
     },
     semanticTokens: {
       colors: {

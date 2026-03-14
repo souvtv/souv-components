@@ -1,3 +1,6 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable sort-keys */
+
 // Generated Colors
 // https://www.tints.dev/
 //
@@ -200,7 +203,10 @@ export const SouvJobs = {
   },
 }
 
-export const getThemeColor = (app: 'jobs'|'account'|'live'|'reporter'|'mam'|'social'|'souv', key: keyof (typeof SouvDefault)['theme']) => {
+export const getThemeColor = (
+  app: 'jobs' | 'account' | 'live' | 'reporter' | 'mam' | 'social' | 'souv',
+  key: keyof (typeof SouvDefault)['theme'],
+) => {
   switch (app) {
     case 'jobs':
       return SouvJobs.theme[key]
