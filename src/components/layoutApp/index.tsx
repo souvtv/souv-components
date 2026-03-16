@@ -23,11 +23,7 @@ export const LayoutApp = ({ children, noContentPadding, maxW, ...p }: Props) => 
       maxWidth={'100vw'}
       maxHeight={'100vh'}
       gap={gap}
-      gridTemplateRows={
-        !!p.primaryRoutes?.length || !!p.secondaryRoutes?.length
-          ? `${header} calc(100vh - ${gap} - ${header})`
-          : `${headerSlim} calc(100vh - ${gap} - ${headerSlim})`
-      }
+      gridTemplateRows={`minmax(${!!p.primaryRoutes?.length || !!p.secondaryRoutes?.length ? header : headerSlim}, max-content) minmax(0, 1fr)`}
       gridTemplateColumns={`100vw`}
       gridTemplateAreas={`
   'header'

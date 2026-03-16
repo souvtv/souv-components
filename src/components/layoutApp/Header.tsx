@@ -62,11 +62,18 @@ export const Header = ({
   )
 
   return (
-    <Center w={'full'} h={'fit-content'} backgroundColor={'bg.emphasized'} px={'3'} py={'2'}>
+    <Center w={'full'} h={'fit-content'} backgroundColor={'bg.emphasized'} px={'3'} py={'2'} overflow={'hidden'}>
       <Column w={'full'} h={'full'} maxW={maxW} gap={'2'}>
         <Card.Root w={'full'} h={'3.6rem'} variant={'subtle'} borderRadius={'xl'}>
           <Card.Body padding={'2'}>
-            <Row w={'full'} h={'full'} justify={'start'} align={'center'} gap={'2'}>
+            <Row
+              w={'full'}
+              h={'full'}
+              justify={'start'}
+              align={'center'}
+              gap={{ base: '1', tablet: '2' }}
+              overflow={'hidden'}
+            >
               {appIcon ? (
                 appIcon
               ) : (
@@ -89,9 +96,9 @@ export const Header = ({
         </Card.Root>
 
         <Show when={!!primaryRoutes?.length || !!secondaryRoutes?.length}>
-          <Row w={'full'} justify={'space-between'} align={'center'}>
+          <Row w={'full'} justify={'space-between'} align={'center'} overflow={'hidden'} gap={'1'} flexWrap={'wrap'}>
             <Show when={!!primaryRoutes || !!actionContent || !!primaryExtra}>
-              <HStack w={'full'}>
+              <HStack minW={0} overflow={'auto'}>
                 {actionContent}
 
                 <Show when={!!actionContent}>
@@ -126,7 +133,7 @@ export const Header = ({
             </Show>
 
             <Show when={!!secondaryRoutes?.length || !!secondaryExtra}>
-              <HStack justify={'end'}>
+              <HStack minW={0} flex={'1 1 50%'} justify={'end'} align={'center'} overflow={'auto'}>
                 <Separator h={'2rem'} borderColor={'border.emphasized'} orientation={'vertical'} />
 
                 <Show when={!!secondaryRoutes?.length}>
