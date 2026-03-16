@@ -1,5 +1,5 @@
 import { Avatar, Box, Group, Icon, IconButton } from '@chakra-ui/react'
-import React, { useCallback, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
@@ -20,81 +20,90 @@ const getBaseUrl = () => {
 const baseUrl = getBaseUrl()
 
 export interface AppItem {
-  value: string
   label: string
-  link: string
-  icon?: React.ReactNode
-  avatar?: React.ReactNode
-  visible?: boolean
+  value: typeof window.APP
+  url: string
+  logo?: React.ReactNode
+  urlNewTab?: boolean
 }
 
 interface Props {
   avatar?: string
   avatarName?: string
-  openNewTab?: boolean
-  localizations?: {
-    account?: string
-    live?: string
-    social?: string
-    mam?: string
-    visao?: string
-  }
-
-  extraApps?: AppItem[]
+  onLoadApps?: (defaultApps: AppItem[]) => AppItem[]
 }
 
-export const AppMenu = ({ avatar, avatarName, localizations, extraApps = [], openNewTab }: Props) => {
+export const AppMenu = ({ avatar, avatarName, onLoadApps }: Props) => {
   const onClick = useCallback(
-    (link: string) => () => {
-      if (openNewTab) {
-        window.open(link, '_blank')
+    (item: AppItem) => () => {
+      if (item.urlNewTab) {
+        window.open(item.url, '_blank', 'noopener,noreferrer')
       } else {
-        window.location.assign(link)
+        window.location.assign(item.url)
       }
     },
-    [openNewTab],
+    [],
   )
 
-  const defaultApps = useMemo((): AppItem[] => {
-    const apps: (AppItem | undefined)[] = [
+  const onAuxClick = useCallback(
+    (item: AppItem) => (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+      if (e.button !== 1) return // 1 = middle
+      e.preventDefault()
+      e.stopPropagation()
+      window.open(item.url, '_blank', 'noopener,noreferrer')
+    },
+    [],
+  )
+
+  const apps = useMemo((): AppItem[] => {
+    const defaultApps: AppItem[] = [
       {
-        avatar: (
+        label: 'Account',
+        logo: (
           <Avatar.Root>
             <Avatar.Fallback name={avatarName} />
             <Avatar.Image src={avatar} />
           </Avatar.Root>
         ),
-        label: localizations?.account || 'Account',
-        link: baseUrl.replace('api', 'account'),
+        url: baseUrl.replace('api', 'account'),
         value: 'account',
       },
       {
-        icon: <SouvLogo app={'live'} />,
-        label: localizations?.live || 'Live',
-        link: baseUrl.replace('api', 'live'),
+        label: 'Live',
+        logo: (
+          <Icon size={'3xl'}>
+            <SouvLogo app={'live'} />
+          </Icon>
+        ),
+        url: baseUrl.replace('api', 'live'),
         value: 'live',
       },
       {
-        icon: <SouvLogo app={'social'} />,
-        label: localizations?.social || 'Social',
-        link: baseUrl.replace('api', 'social'),
+        label: 'Social',
+        logo: (
+          <Icon size={'3xl'}>
+            <SouvLogo app={'social'} />
+          </Icon>
+        ),
+        url: baseUrl.replace('api', 'social'),
         value: 'social',
       },
       {
-        icon: <SouvLogo app={'mam'} />,
-        label: localizations?.mam || 'Gallery',
-        link: baseUrl.replace('api', 'mam'),
+        label: 'Gallery',
+        logo: (
+          <Icon size={'3xl'}>
+            <SouvLogo app={'mam'} />
+          </Icon>
+        ),
+        url: baseUrl.replace('api', 'mam'),
         value: 'mam',
       },
     ]
 
-    return apps.filter(Boolean) as AppItem[]
-  }, [avatar, avatarName, localizations?.account, localizations?.live, localizations?.mam, localizations?.social])
+    const loadedApps = onLoadApps?.(defaultApps) || defaultApps
 
-  const apps = useMemo(
-    () => [...defaultApps, ...extraApps].filter(app => app?.visible !== false),
-    [defaultApps, extraApps],
-  )
+    return loadedApps.filter(a => !!a)
+  }, [avatar, avatarName, onLoadApps])
 
   return (
     <Box colorPalette={'gray'}>
@@ -116,10 +125,11 @@ export const AppMenu = ({ avatar, avatarName, localizations, extraApps = [], ope
                 p={'0.5rem'}
                 flexDirection={'row'}
                 justifyContent={'center'}
-                onClick={onClick(item.link)}
+                cursor={'pointer'}
+                onAuxClick={onAuxClick(item)}
+                onClick={onClick(item)}
               >
-                {item.avatar}
-                {item.icon && <Icon size={'3xl'}>{item.icon}</Icon>}
+                {item.logo}
                 {item.label}
               </MenuItem>
             ))}

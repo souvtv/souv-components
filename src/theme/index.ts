@@ -5,6 +5,7 @@ import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 import { SouvDefault } from './colors'
 import { IconRecipe } from './recipes/icon'
 import { HeadingRecipe } from './recipes/heading'
+import { TabsSlotRecipe } from './recipes/tabs'
 
 const baseConfig = defineConfig({
   conditions: {
@@ -31,6 +32,9 @@ const baseConfig = defineConfig({
       laptop: '62em',
       mobile: '30em',
       tablet: '48em',
+    },
+    slotRecipes: {
+      tabs: TabsSlotRecipe,
     },
     recipes: {
       icon: IconRecipe,

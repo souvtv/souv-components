@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { Show, Center, Card, Heading, HStack, Icon, Separator, Tabs, Link } from '@chakra-ui/react'
+import { useCallback } from 'react'
+import { Show, Center, Card, Heading, HStack, Icon, Separator, Tabs } from '@chakra-ui/react'
 
 import { LayoutRouteType } from 'src/types/route'
 
@@ -15,8 +15,6 @@ export interface HeaderProps {
   maxW?: string
   avatar?: string
   showAppSelector?: boolean
-  openNewTab?: boolean
-  extraApps?: AppItem[]
   avatarName?: string
   headerContent?: React.ReactNode
   actionContent?: React.ReactNode
@@ -24,13 +22,7 @@ export interface HeaderProps {
   primaryExtra?: React.ReactNode
   secondaryRoutes?: LayoutRouteType[]
   secondaryExtra?: React.ReactNode
-  localizations?: {
-    account?: string
-    live?: string
-    social?: string
-    mam?: string
-    visao?: string
-  }
+  onLoadApps?: (defaultApps: AppItem[]) => AppItem[]
   onCheckMatch?: (path: string, end?: boolean) => void
   onNavigate?: (path: string) => void
 }
@@ -46,19 +38,27 @@ export const Header = ({
   avatar,
   avatarName,
   showAppSelector = true,
-  localizations,
+  primaryExtra,
+  secondaryExtra,
   onNavigate,
   onCheckMatch,
-  extraApps,
-  openNewTab, primaryExtra, secondaryExtra
-
-
+  onLoadApps,
 }: HeaderProps) => {
   const handleSelectRoute = useCallback(
     (path: string) => () => {
       onNavigate?.(path)
     },
     [onNavigate],
+  )
+
+  const onAuxClick = useCallback(
+    (path: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (e.button !== 1) return // 1 = middle
+      e.preventDefault()
+      e.stopPropagation()
+      window.open(path, '_blank', 'noopener,noreferrer')
+    },
+    [],
   )
 
   return (
@@ -74,9 +74,12 @@ export const Header = ({
                   <SouvLogo fill={'theme.fg'} />
                 </Icon>
               )}
+
               <Heading size={'subtitle'}>{appName}</Heading>
 
-              {showAppSelector && <AppMenu extraApps={extraApps} openNewTab={openNewTab} avatar={avatar} avatarName={avatarName} localizations={localizations} />}
+              <Show when={showAppSelector}>
+                <AppMenu avatar={avatar} avatarName={avatarName} onLoadApps={onLoadApps} />
+              </Show>
 
               <Separator h={'full'} orientation={'vertical'} />
 
@@ -99,12 +102,18 @@ export const Header = ({
                   variant={'solid'}
                   colorPalette={'gray'}
                   value={
-                    primaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label || ''
+                    primaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label ||
+                    ''
                   }
                 >
                   <Tabs.List>
                     {primaryRoutes?.map((route, idx) => (
-                      <Tabs.Trigger key={idx} value={route.label} as={Link} onClick={handleSelectRoute(route.path)}>
+                      <Tabs.Trigger
+                        key={idx}
+                        value={route.label}
+                        onAuxClick={onAuxClick(route.path)}
+                        onClick={handleSelectRoute(route.path)}
+                      >
                         {route.icon}
                         {route.label}
                       </Tabs.Trigger>
@@ -112,47 +121,42 @@ export const Header = ({
                   </Tabs.List>
                 </Tabs.Root>
 
-                <Show when={!!primaryExtra}>
-                  {primaryExtra}
-                </Show>
-
+                <Show when={!!primaryExtra}>{primaryExtra}</Show>
               </HStack>
             </Show>
 
             <Show when={!!secondaryRoutes?.length || !!secondaryExtra}>
               <HStack justify={'end'}>
-
                 <Separator h={'2rem'} borderColor={'border.emphasized'} orientation={'vertical'} />
 
-
                 <Show when={!!secondaryRoutes?.length}>
-
                   <Tabs.Root
                     variant={'solid'}
                     colorPalette={'gray'}
                     value={
-                      secondaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))?.label ||
-                      ''
+                      secondaryRoutes?.find(route => onCheckMatch?.(route.pathMatch || route.path, route.pathEnd))
+                        ?.label || ''
                     }
                   >
                     <Tabs.List>
                       {secondaryRoutes?.map((route, idx) => (
-                        <Tabs.Trigger key={idx} value={route.label} onClick={handleSelectRoute(route.path)}>
+                        <Tabs.Trigger
+                          key={idx}
+                          value={route.label}
+                          onAuxClick={onAuxClick(route.path)}
+                          onClick={handleSelectRoute(route.path)}
+                        >
                           {route.icon}
                           {route.label}
                         </Tabs.Trigger>
                       ))}
                     </Tabs.List>
                   </Tabs.Root>
-
                 </Show>
 
-                <Show when={!!secondaryExtra}>
-                  {secondaryExtra}
-                </Show>
+                <Show when={!!secondaryExtra}>{secondaryExtra}</Show>
               </HStack>
             </Show>
-
           </Row>
         </Show>
       </Column>
