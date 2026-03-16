@@ -1,23 +1,11 @@
-import { Avatar, Box, Group, Icon, IconButton } from '@chakra-ui/react'
+import { Avatar, Box, type BoxProps, Group, Icon, IconButton } from '@chakra-ui/react'
 import { useCallback, useMemo } from 'react'
 import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
 import { SouvLogo } from '../svg/SouvLogo'
 
-const getBaseUrl = () => {
-  const def = 'https://api.souv.tv'
-
-  if (typeof BASE_URL !== 'undefined') {
-    return BASE_URL || def
-  } else if (typeof process !== 'undefined' && process.env.BASE_URL) {
-    return process.env.BASE_URL || def
-  }
-
-  return def
-}
-
-const baseUrl = getBaseUrl()
+import { useLayoutAppContext } from '.'
 
 export interface AppItem {
   label: string
@@ -27,13 +15,9 @@ export interface AppItem {
   urlNewTab?: boolean
 }
 
-interface Props {
-  avatar?: string
-  avatarName?: string
-  onLoadApps?: (defaultApps: AppItem[]) => AppItem[]
-}
+export const AppMenu = (p: BoxProps) => {
+  const { avatarUrl, avatarName, baseUrl, onLoadApps } = useLayoutAppContext()
 
-export const AppMenu = ({ avatar, avatarName, onLoadApps }: Props) => {
   const onClick = useCallback(
     (item: AppItem) => () => {
       if (item.urlNewTab) {
@@ -62,7 +46,7 @@ export const AppMenu = ({ avatar, avatarName, onLoadApps }: Props) => {
         logo: (
           <Avatar.Root>
             <Avatar.Fallback name={avatarName} />
-            <Avatar.Image src={avatar} />
+            <Avatar.Image src={avatarUrl} />
           </Avatar.Root>
         ),
         url: baseUrl.replace('api', 'account'),
@@ -103,10 +87,10 @@ export const AppMenu = ({ avatar, avatarName, onLoadApps }: Props) => {
     const loadedApps = onLoadApps?.(defaultApps) || defaultApps
 
     return loadedApps.filter(a => !!a)
-  }, [avatar, avatarName, onLoadApps])
+  }, [baseUrl, avatarUrl, avatarName, onLoadApps])
 
   return (
-    <Box colorPalette={'gray'}>
+    <Box colorPalette={'gray'} {...p}>
       <MenuRoot variant={'subtle'} lazyMount={false} unmountOnExit={false}>
         <MenuTrigger asChild>
           <IconButton variant={'ghost'} size={'lg'} p={0} outline={'none'}>
