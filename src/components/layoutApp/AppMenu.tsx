@@ -1,5 +1,5 @@
 import { Avatar, Box, type BoxProps, Group, Icon, IconButton } from '@chakra-ui/react'
-import { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'

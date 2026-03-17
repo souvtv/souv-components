@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from 'react'
 import { Button } from '@chakra-ui/react'
 import { LuUserRound } from 'react-icons/lu'
 

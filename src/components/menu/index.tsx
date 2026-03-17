@@ -1,5 +1,5 @@
 import { Menu as M, type MenuRootProps, Portal, Show, Group } from '@chakra-ui/react'
-import { RefObject, useCallback } from 'react'
+import React, { RefObject, useCallback } from 'react'
 
 export type MenuItemType = {
   label?: React.ReactNode | 'separator'

@@ -1,5 +1,17 @@
 # souv-components
 
+## 1.2.0
+
+### Minor Changes
+
+- d35c314: Adicionado novos components padrao de selecao de conta e workspace
+- 56d773e: Adicionado novos campos extras para header main layout
+- 74b3e20: Implementado novo callback para construir a lista apps
+
+### Patch Changes
+
+- d84c153: Melhorias layout responsivo header
+
 ## 1.1.4
 
 ### Patch Changes

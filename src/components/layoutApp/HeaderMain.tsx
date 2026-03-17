@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import React from 'react'
 import { Card, Heading, Icon, type IconProps, type CardRootProps, type HeadingProps } from '@chakra-ui/react'
 
 import { Row } from '../row'

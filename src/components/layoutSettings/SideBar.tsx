@@ -1,6 +1,7 @@
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { Separator, VStack, Button } from '@chakra-ui/react'
-import { LayoutRouteType } from 'src/types/route'
+
+import { LayoutRouteType } from '../../types/route'
 
 export interface SidebarProps {
   primaryRoutes?: LayoutRouteType[]

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Tabs, HStack } from '@chakra-ui/react'
 
 import type { FlexProps, TabsTriggerProps, TabsRootProps, StackProps } from '@chakra-ui/react'

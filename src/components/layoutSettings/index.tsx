@@ -1,3 +1,4 @@
+import React from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
 
 import { SideBar, SidebarProps } from './SideBar'

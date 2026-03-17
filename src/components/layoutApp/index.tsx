@@ -1,5 +1,5 @@
 import { Box, Grid, GridItem, Center, Separator as ChakraSeparator } from '@chakra-ui/react'
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 
 import type { GridProps, GridItemProps, SeparatorProps } from '@chakra-ui/react'
 
@@ -96,7 +96,7 @@ export const LayoutAppRoot = ({
     for (const path of paths) {
       const noMachEnd = pathsNoMachEnd.includes(path)
       const match = matchPath({ end: !noMachEnd, path }, window.location.pathname)
-      console.log('Matching path:', noMachEnd, path, ' isMatch ', match)
+
       if (match) {
         return path
       }
