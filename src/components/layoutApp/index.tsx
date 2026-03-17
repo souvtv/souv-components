@@ -3,9 +3,8 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 
 import type { GridProps, GridItemProps, SeparatorProps } from '@chakra-ui/react'
 
-import { matchPath } from 'src/helpers/routes'
-
 import { Column } from '../column'
+import { matchPath } from '../../helpers/routes'
 
 import { HeaderMain } from './HeaderMain'
 import { HeaderRoutes } from './HeaderRoutes'

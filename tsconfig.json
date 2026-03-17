@@ -16,7 +16,6 @@
     "types": [
       "node"
     ],
-    "baseUrl": ".",
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
