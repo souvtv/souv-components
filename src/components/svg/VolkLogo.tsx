@@ -1,10 +1,7 @@
 import { chakra } from '@chakra-ui/react'
+import React from 'react'
 
-interface Props {
-  opacity?: number
-  w?: string
-  h?: string
-}
+type Props = React.ComponentProps<typeof chakra.svg>
 
 export const VolkLogo = (props: Props) => (
   <chakra.svg {...props} xmlns={'http://www.w3.org/2000/svg'} viewBox={'0 0 324.22 324.22'}>

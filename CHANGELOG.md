@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.2.1
+
+### Patch Changes
+
+- 357c8cc: Adicionado icone volk e adicionado a lista padrao de apps
+
 ## 1.2.0
 
 ### Minor Changes
