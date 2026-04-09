@@ -4,6 +4,7 @@ import { IoApps } from 'react-icons/io5'
 
 import { MenuRoot, MenuContent, MenuItem, MenuTrigger } from '../ui/Menu'
 import { SouvLogo } from '../svg/SouvLogo'
+import { VolkLogo } from '../svg/VolkLogo'
 
 import { useLayoutAppContext } from '.'
 
@@ -81,6 +82,16 @@ export const AppMenu = (p: BoxProps) => {
         ),
         url: baseUrl.replace('api', 'mam'),
         value: 'mam',
+      },
+      {
+        label: 'Volk',
+        logo: (
+          <Icon size={'3xl'}>
+            <VolkLogo />
+          </Icon>
+        ),
+        url: baseUrl.replace('api', 'volk'),
+        value: 'volk',
       },
     ]
 

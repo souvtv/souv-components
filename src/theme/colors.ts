@@ -203,10 +203,7 @@ export const SouvJobs = {
   },
 }
 
-export const getThemeColor = (
-  app: 'jobs' | 'account' | 'live' | 'reporter' | 'mam' | 'social' | 'souv',
-  key: keyof (typeof SouvDefault)['theme'],
-) => {
+export const getThemeColor = (app: typeof window.APP, key: keyof (typeof SouvDefault)['theme']) => {
   switch (app) {
     case 'jobs':
       return SouvJobs.theme[key]
