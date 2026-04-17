@@ -90,7 +90,7 @@ export const AppMenu = (p: BoxProps) => {
             <VolkLogo />
           </Icon>
         ),
-        url: baseUrl.replace('api', 'volk'),
+        url: PRODUCTION ? 'app.volkpresenter.tv' : baseUrl.replace('api', 'volk'),
         value: 'volk',
       },
     ]
