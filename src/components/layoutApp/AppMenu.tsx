@@ -8,6 +8,8 @@ import { VolkLogo } from '../svg/VolkLogo'
 
 import { useLayoutAppContext } from '.'
 
+const volkProdURL = 'https://app.volkpresenter.tv'
+
 export interface AppItem {
   label: string
   value: typeof window.APP
@@ -90,7 +92,7 @@ export const AppMenu = (p: BoxProps) => {
             <VolkLogo />
           </Icon>
         ),
-        url: PRODUCTION ? 'app.volkpresenter.tv' : baseUrl.replace('api', 'volk'),
+        url: PRODUCTION ? volkProdURL : baseUrl.replace('api', 'volk'),
         value: 'volk',
       },
     ]

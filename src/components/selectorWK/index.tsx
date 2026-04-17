@@ -9,11 +9,12 @@ interface Props {
   selectedLabel?: string
   items?: MenuItemType[]
   loading?: boolean
+  disabled?: boolean
 }
 
-export const SelectorWK = ({ width = '5rem', items = [], selectedLabel, loading }: Props) => (
+export const SelectorWK = ({ width = '5rem', items = [], selectedLabel, disabled, loading }: Props) => (
   <Menu items={items}>
-    <Button w={width} variant={'solid'} disabled={loading} loading={loading || !selectedLabel}>
+    <Button w={width} variant={'solid'} disabled={disabled} loading={loading}>
       {selectedLabel}
     </Button>
   </Menu>

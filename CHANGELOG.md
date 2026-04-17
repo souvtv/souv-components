@@ -1,5 +1,11 @@
 # souv-components
 
+## 1.2.2
+
+### Patch Changes
+
+- 180a9b8: Ajuste rotas volk
+
 ## 1.2.1
 
 ### Patch Changes
